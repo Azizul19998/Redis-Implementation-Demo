@@ -33,4 +33,14 @@ public class UserController {
     }
 
 
+    @PostMapping("hmset")
+    public void setHashValue(@RequestParam("key") String key, @RequestParam("hashkey") String hashkey, @RequestParam("hashValue") String hashValue )
+    {
+        redisTemplate.opsForHash().put(key,hashkey,hashValue);
+    }
+
+    @GetMapping("hmget-key")
+    public String getHashValue(@RequestParam("key") String key, @RequestParam("hashkey") String hashkey) {
+        return (String) redisTemplate.opsForHash().get(key,hashkey);
+    }
 }
